@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unbooted | :)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #0a192f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* ===== Multi-Layer Animated Background ===== */
+        .bg-layer-1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+            z-index: -3;
+        }
+        
+        .bg-layer-2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(64, 158, 255, 0.1) 0%, transparent 40%);
+            animation: pulse-bg-1 15s infinite alternate;
+            z-index: -2;
+        }
+        
+        .bg-layer-3 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 70%, rgba(100, 200, 255, 0.1) 0%, transparent 40%);
+            animation: pulse-bg-2 12s infinite alternate;
+            z-index: -2;
+        }
+        
+        @keyframes pulse-bg-1 {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.7; transform: scale(1.2); }
+        }
+        
+        @keyframes pulse-bg-2 {
+            0% { opacity: 0.2; transform: scale(1) rotate(0deg); }
+            100% { opacity: 0.5; transform: scale(1.3) rotate(5deg); }
+        }
+        
+        /* ===== Particle Systems ===== */
+        .particles-1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .particles-2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        .particle-1 {
+            background: rgba(64, 158, 255, 0.6);
+            box-shadow: 0 0 10px rgba(64, 158, 255, 0.8);
+        }
+        
+        .particle-2 {
+            background: rgba(100, 200, 255, 0.4);
+            box-shadow: 0 0 15px rgba(100, 200, 255, 0.6);
+        }
+        
+        .particle-3 {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* ===== Wave Animation ===== */
+        .wave {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="rgba(64,158,255,0.1)" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="rgba(64,158,255,0.1)" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="rgba(64,158,255,0.1)"/></svg>');
+            background-repeat: repeat-x;
+            animation: wave 30s linear infinite;
+            z-index: -1;
+            opacity: 0.8;
+        }
+        
+        .wave-1 {
+            height: 150px;
+            animation: wave 25s linear infinite reverse;
+            opacity: 0.5;
+            bottom: -20px;
+        }
+        
+        .wave-2 {
+            height: 200px;
+            animation: wave 35s linear infinite;
+            opacity: 0.3;
+            bottom: -40px;
+        }
+        
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* ===== Profile Card ===== */
+        .profile-card {
+            width: 400px;
+            background: rgba(10, 25, 47, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 40px rgba(64, 158, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(64, 158, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(64, 158, 255, 0) 0%,
+                rgba(64, 158, 255, 0) 30%,
+                rgba(64, 158, 255, 0.1) 45%,
+                rgba(64, 158, 255, 0.3) 60%,
+                rgba(64, 158, 255, 0) 70%
+            );
+            transform: rotate(30deg);
+            animation: shine 6s infinite;
+        }
+        
+        @keyframes shine {
+            0% {
+                transform: rotate(30deg) translate(-30%, -30%);
+            }
+            100% {
+                transform: rotate(30deg) translate(30%, 30%);
+            }
+        }
+        
+        .profile-card:hover {
+            box-shadow: 0 0 60px rgba(64, 158, 255, 0.6);
+            transform: translateY(-5px);
+        }
+        
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            overflow: hidden;
+            border: 4px solid rgba(64, 158, 255, 0.3);
+            box-shadow: 0 0 30px rgba(64, 158, 255, 0.5);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-pic:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(64, 158, 255, 0.7);
+        }
+        
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-pic::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: rgba(64, 158, 255, 0.7);
+            border-left-color: rgba(64, 158, 255, 0.7);
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .name {
+            text-align: center;
+            color: #fff;
+            font-size: 26px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(64, 158, 255, 0.6);
+        }
+        
+        .bio {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        
+        .date {
+            text-align: center;
+            color: rgba(64, 158, 255, 0.9);
+            font-size: 16px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        
+        .glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at center, rgba(64, 158, 255, 0.1) 0%, rgba(64, 158, 255, 0) 70%);
+            animation: pulse 4s infinite alternate;
+            z-index: -1;
+            border-radius: 20px;
+        }
+        
+        @keyframes pulse {
+            0% {
+                opacity: 0.3;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+        
+        .corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(64, 158, 255, 0.5);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .corner-tl {
+            top: 15px;
+            left: 15px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 8px 0 0 0;
+        }
+        
+        .corner-tr {
+            top: 15px;
+            right: 15px;
+            border-left: none;
+            border-bottom: none;
+            border-radius: 0 8px 0 0;
+        }
+        
+        .corner-bl {
+            bottom: 15px;
+            left: 15px;
+            border-right: none;
+            border-top: none;
+            border-radius: 0 0 0 8px;
+        }
+        
+        .corner-br {
+            bottom: 15px;
+            right: 15px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 8px 0;
+        }
+        
+        .profile-card:hover .corner {
+            opacity: 1;
+        }
+        
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(64, 158, 255, 0.3);
+            transform: scale(0);
+            animation: ripple 3s infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        .friend-btn {
+            display: block;
+            width: 180px;
+            margin: 0 auto;
+            padding: 12px 25px;
+            background: rgba(64, 158, 255, 0.4);
+            color: white;
+            border: 2px solid rgba(64, 158, 255, 0.6);
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .friend-btn:hover {
+            background: rgba(64, 158, 255, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(64, 158, 255, 0.4);
+        }
+        
+        .friend-btn:active {
+            transform: translateY(0);
+        }
+        
+        .friend-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .friend-btn:focus:not(:active)::after {
+            animation: ripple-effect 1s ease-out;
+        }
+        
+        @keyframes ripple-effect {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        .copied {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 25, 47, 0.8);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            border: 2px solid rgba(64, 158, 255, 0.6);
+            box-shadow: 0 0 15px rgba(64, 158, 255, 0.6);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+            font-size: 16px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .show {
+            opacity: 1;
+        }
+        
+        .copyright {
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            padding: 10px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <!-- Multi-layer background -->
+    <div class="bg-layer-1"></div>
+    <div class="bg-layer-2"></div>
+    <div class="bg-layer-3"></div>
+    
+    <!-- Particle systems -->
+    <div class="particles-1" id="particles-1"></div>
+    <div class="particles-2" id="particles-2"></div>
+    
+    <!-- Wave animations -->
+    <div class="wave wave-1"></div>
+    <div class="wave wave-2"></div>
+    
+    <!-- Profile Card -->
+    <div class="profile-card">
+        <div class="glow"></div>
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+        <div class="profile-pic">
+            <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSnvOeKrV-718V3mJGw-DNXaSz3UytWlpwfe6quyTMI4BxK2UeD" alt="Profile Picture">
+        </div>
+        <h1 class="name">Unbooted</h1>
+        <p class="bio">:)</p>
+        <p class="date">Cool Dude</p>
+        <button class="friend-btn" id="friendBtn">Friend Me</button>
+    </div>
+    
+    <div class="copied" id="copiedMessage">Username "Unbooted" copied to clipboard!</div>
+    
+    <!-- Copyright Notice -->
+    <div class="copyright">© 2025 Hazinf. All rights reserved.</div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create multiple particle systems
+            const particles1 = document.getElementById('particles-1');
+            const particles2 = document.getElementById('particles-2');
+            
+            // First particle system (larger, slower particles)
+            for (let i = 0; i < 30; i++) {
+                createParticle(particles1, 'particle-1', 3, 8, 20);
+                createParticle(particles1, 'particle-2', 2, 6, 25);
+            }
+            
+            // Second particle system (smaller, faster particles)
+            for (let i = 0; i < 50; i++) {
+                createParticle(particles2, 'particle-2', 1, 4, 10);
+                createParticle(particles2, 'particle-3', 0.5, 2, 15);
+            }
+            
+            function createParticle(container, type, minSize, maxSize, duration) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle', type);
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                
+                // Random size
+                const size = Math.random() * (maxSize - minSize) + minSize;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random animation
+                particle.style.animationDuration = (Math.random() * 10 + duration) + 's';
+                particle.style.animationDelay = (Math.random() * 10) + 's';
+                
+                container.appendChild(particle);
+                
+                // Remove and recreate particle after animation completes
+                setTimeout(() => {
+                    particle.remove();
+                    createParticle(container, type, minSize, maxSize, duration);
+                }, parseFloat(particle.style.animationDuration) * 1000);
+            }
+            
+            // Create ripple effect on click
+            function createRipple(e) {
+                const ripple = document.createElement('div');
+                ripple.classList.add('ripple');
+                ripple.style.left = e.clientX + 'px';
+                ripple.style.top = e.clientY + 'px';
+                document.body.appendChild(ripple);
+                setTimeout(() => {
+                    ripple.remove();
+                }, 3000);
+            }
+            
+            document.addEventListener('click', createRipple);
+            
+            // Friend button functionality
+            const friendBtn = document.getElementById('friendBtn');
+            const copiedMessage = document.getElementById('copiedMessage');
+            
+            friendBtn.addEventListener('click', function() {
+                navigator.clipboard.writeText('Unbooted').then(() => {
+                    copiedMessage.classList.add('show');
+                    setTimeout(() => {
+                        copiedMessage.classList.remove('show');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            });
+            
+            // Animate corners with blue hues
+            setInterval(() => {
+                const corners = document.querySelectorAll('.corner');
+                corners.forEach(corner => {
+                    const hue = Math.floor(Math.random() * 30) + 200; // Blue hues
+                    corner.style.borderColor = `hsla(${hue}, 80%, 60%, 0.7)`;
+                });
+            }, 2000);
+            
+            // Add subtle mouse parallax effect to profile card
+            const card = document.querySelector('.profile-card');
+            document.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                card.style.transform = `translateY(-5px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            });
+            
+            // Reset card position when mouse leaves
+            document.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(-5px) rotateY(0deg) rotateX(0deg)';
+            });
+        });
+    </script>
+</body>
+</html>
